@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Login & Registration";
+}
+@model belt1.Models.User
+<h1>Login & Registration</h1>
+
+<p style="color:red"> @ViewBag.loginerror</p>
+<form action="login" method="post">
+    <fieldset>
+        <legend>Login</legend>
+        <label>Email:</label>
+        <input type="text" name="Email"><br>
+        <label>Password:</label>
+        <input type="password" name="Password"><br>
+        <input type="submit" value="Login" class="submitbutton">
+
+
+    </fieldset>
+
+</form>
+<p style="color:red"> @ViewBag.Error </p>
+<div asp-validation-summary="All"></div>
+<form asp-controller="User" asp-action="register" method="post">
+    <fieldset>
+         <legend>Register</legend>
+        <label asp-for="FirstName">First Name:</label>
+        <input asp-for="FirstName"/><br>
+        <label asp-for="LastName">Last Name:</label>
+        <input asp-for="LastName"/><br>
+        <label asp-for="Email">Email:</label>
+        <input asp-for="Email"/><br>
+        <label asp-for="Password">Password:</label>
+        <input asp-for="Password"/><br>
+        <label>Password Verification:</label>
+        <input type="password" name="Password2"><br>
+        <button type="submit" class="submitbutton">Register</button>
+    </fieldset>   
+</form>

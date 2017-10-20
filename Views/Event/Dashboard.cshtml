@@ -1,0 +1,51 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1 class = "inline">Dojo Activity Center</h1>
+<span>Welcome, @ViewBag.userinfo.FirstName</span>     <a href="logout">Log off</a>
+<hr>
+<table>
+    <thead>
+        <th>Activity</th>
+        <th>Date and Time</th>
+        <th>Duration</th>
+        <th>Event Coordinator</th>
+        <th># of Participants</th>
+        <th>Actions</th>
+    </thead>
+    @foreach(var item in ViewBag.list){
+        <tr>
+            <td><a href="event/@item.EventId"> @item.Title </a></td>
+            <td>@item.Date.ToString("M/d") @@ @item.Time</td>
+            <td>@item.Duration @item.HM</td>
+            <td>@item.CreatorName</td>
+            <td>@item.Coming.Count</td>
+            <td>
+                @if(item.Creator == ViewBag.uid) {
+                    <a href="delete/@item.EventId">Delete</a>
+                }
+                else {
+                    bool already = false;
+                    foreach(var guest in item.Coming)
+                    {
+                        if(guest.UserId == ViewBag.uid)
+                        {
+                        <a href="leave/@guest.EventId">Leave</a>
+                        already = true;
+                        }
+                    }
+                    if(!already)
+                    {
+                    <a href="join/@item.EventId">Join</a>
+                    }
+                    
+                }   
+            </td>
+        </tr>
+    }
+
+</table>
+<br>
+<br>
+<a href="new"><button>Add New Activity!</button></a>

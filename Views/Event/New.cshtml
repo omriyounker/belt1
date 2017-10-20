@@ -1,0 +1,29 @@
+<h1 class="inline">Dojo Activity Center</h1> <a href="/dashboard">Home</a>  |  <a href="/logout">Log off</a><br>
+<br>
+<br>
+@model belt1.Models.Event
+<p style="color:red"> @ViewBag.Error</p>
+<div asp-validation-summary="All"></div>
+<form asp-controller="Event" asp-action="create" method="post">
+    <fieldset>
+         <legend>Create an Activity!</legend>
+        <label asp-for="Title">Title:</label>
+        <input asp-for="Title"/>
+        <label asp-for="Time">Time:</label>
+        <input asp-for="Time" value="hours/minutes"/><br>
+        <label asp-for="Date">Date:</label>
+        <input asp-for="Date" value="Month/Day/Year"/><br>
+        <label asp-for="Duration">Duration:</label>
+        <input asp-for="Duration"/>
+        <select name = "hm">
+            <option value="Days">Days</option>
+            <option value="Hours">Hours</option>
+            <option value="Minutes">Minutes</option>
+        </select>
+        <br>
+        <label asp-for="Description">Description:</label><br>
+        <textarea asp-for="Description" rows="15" cols="60"></textarea>
+
+        <button type="submit" class="submitbutton">Create Activity</button>
+    </fieldset>   
+</form>

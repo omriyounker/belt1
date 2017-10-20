@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Activity";
+}
+<h1 class="inline">Dojo Activity Center</h1> <a href="/dashboard">Home</a>  |  <a href="/logout">Log off</a><br>
+<br>
+<h2 class="inline">@ViewBag.Wed.Title</h2>
+
+@if(@ViewBag.Wed.Creator == ViewBag.uid) {
+    <a href="/delete/@ViewBag.Wed.EventId" class="buttonmoved"><button>Delete</button></a>
+}
+else {
+    bool already = false;
+    foreach(var guest in ViewBag.Wed.Coming)
+    {
+        if(guest.UserId == ViewBag.uid)
+        {
+        <a href="/leave/@guest.EventId" class="buttonmoved"><button>Leave</button></a>
+        already = true;
+        }
+    }
+    if(!already)
+    {
+    <a href="/join/@ViewBag.Wed.EventId" class="buttonmoved"><button>Join</button></a>
+    }
+    
+}
+<br>
+<h3>Event Coordinator: @ViewBag.Wed.CreatorName</h2>
+<br>
+<br>
+<h3>Description</h3><br>
+<p class="wude">@ViewBag.Wed.Description</p>
+<h3>Participants:</h3>
+<ul>
+
+    @{
+        foreach(var item in ViewBag.Wed.Coming){
+            <li>@item.User.FirstName</li>
+        }
+    }
+</ul>
